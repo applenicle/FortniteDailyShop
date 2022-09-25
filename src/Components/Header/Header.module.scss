@@ -1,0 +1,28 @@
+.inner {
+  display: flex;
+  // justify-content: space-between;
+  padding: 40px 0;
+}
+.menu {
+  // padding: 0px 20px;
+  // padding-left: 15px;
+  // padding-right: 60px;
+}
+.list {
+  display: flex;
+}
+.item {
+  cursor: pointer;
+  padding: 0px 20px;
+
+  // padding-left: 35px;
+  // padding-right: 45px;
+}
+.logo {
+  margin: 0 auto;
+  img {
+    width: 100%;
+    max-width: 50px;
+    object-fit: cover;
+  }
+}
