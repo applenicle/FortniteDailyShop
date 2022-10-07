@@ -1,50 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Card.module.scss';
-import { useSelector, useDispatch } from 'react-redux';
-// import { setItems } from '../../redux/Items/slice';
-import { AppDispatch } from '../../redux/store';
-import { fetchItems } from '../../redux/Items/fetch';
 
-// { itemId, images, cost, description }
-
-const Card: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { items } = useSelector((state: any) => state.ItemSlice);
-
-  React.useEffect(() => {
-    dispatch(fetchItems({}));
-  }, [dispatch]);
-
+const Card: React.FC<any> = ({ daily, vbuckIcon, featured, specialFeatured }) => {
   return (
     <div>
-      <div>
-        <h2 className={styles.title}>
-          current fortnite item shop
-          <span> Data today</span>
-        </h2>
-        <div>New items in 13 hours</div>
-        {/* <filter></filter> */}
+      {/* <h3 className={styles.title}>{daily?.entries?.section?.name}</h3> */}
+      {daily?.entries.map((obj: any) => (
         <div>
-          {/* <h3>{item.section.name[0]}</h3> */}
-          <div className={styles.list}>
-            {items.map((user: any) => (
-              <div key={user.mainId} className={styles.item}>
-                <h3>{user.section.name}</h3>
-                <img
-                  className={styles.image}
-                  src={
-                    user?.displayAssets[1]
-                      ? user?.displayAssets[1].background
-                      : user.displayAssets[0].background
-                  }
-                  alt={user?.section?.id}
-                />
-                <p>{user?.displayName}</p>
+          <ul className={styles.list} key={obj?.offerId}>
+            <li className={styles.item}>
+              <img
+                src={obj?.newDisplayAsset?.materialInstances[0]?.images?.Background}
+                alt={obj?.newDisplayAsset?.id}
+              />
+              <div>
+                <h4>{obj?.items[0]?.name}</h4>
+                <p>{obj?.regularPrice}</p>
+                <img className={styles.icon} src={vbuckIcon} alt="V-Bucks" />
               </div>
-            ))}
-          </div>
+            </li>
+          </ul>
         </div>
-      </div>
+      ))}
     </div>
   );
 };
